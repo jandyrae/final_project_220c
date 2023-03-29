@@ -1,25 +1,29 @@
 #include <iostream>
 #include <string>
+#include <random>
 #include "Articles.h"
 using namespace std;
 
 void display_choices();
 int number_prompt(string prompt);
+std::list<Articles>::iterator it;
+std::list<Articles>::iterator iterate_list(list<Articles>& article_list, int a_of_f);
+int random_article();
 
 int main()
 {
-	int choice;
-	int article_num;
+	int choice, article_num;
 	Articles article;
 	list<Articles> articles;
 
 	cout << "Welcome to learning your Articles of Faith\n";
+	cout << "******************************************\n";
 	bool make_choice = true;
 
 	while (make_choice) {
 
 		display_choices();
-		choice = number_prompt("Which would you like to start with? ");
+		choice = number_prompt("\nWhich would you like to start with? ");
 		
 		switch (choice) {
 
@@ -37,14 +41,32 @@ int main()
 		case 2:
 			// display single
 			article_num = number_prompt("Which Article of Faith do you want displayed? ");
+			it = iterate_list(articles, article_num);
+			it->individual_display();
 			break;
 
 		case 3:
-			// Display random AofF
+			// Display random 
+			int random;
+			random = random_article();
+			it = iterate_list(articles, random);
+			it->individual_display();
 			break;
 
 		case 4:
 			// Guess which one (enter number as guess)
+			int to_guess;
+			int guess;
+			to_guess = random_article(); 
+			it = iterate_list(articles, to_guess);
+			it->display_verse_only();
+			guess = number_prompt("\nWhat is your guess? ");
+			if (to_guess == guess) {
+				cout << "Great, you got it! \n\n";
+			}
+			else {
+				cout << "Shoot! Maybe next time. \nIt was number " << to_guess << ".\n";
+			}
 			break;
 
 		default:
@@ -72,3 +94,20 @@ int number_prompt(string prompt) {
 	return stoi(prompt);
 }
 
+std::list<Articles>::iterator iterate_list(list<Articles>&  article_list, int a_of_f) {
+	for (std::list<Articles>::iterator it = article_list.begin(); it != article_list.end(); ++it) {
+		if (a_of_f == (*it).get_article()) {
+			// it->individual_display();
+			return it;
+		}
+	}
+	return it;
+}
+
+int random_article()
+{
+	int min = 1;
+	int max = 13;
+	int randNum = rand() % (max - min + 1) + min;
+	return randNum;
+}

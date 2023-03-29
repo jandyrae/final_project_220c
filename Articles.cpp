@@ -7,12 +7,22 @@ using namespace std;
 Articles::Articles() : verse{ "" }, text{ "" }, a_of_f{ 0 } {};
 Articles::Articles(string title, string full_verse, int article_num ) : verse( title ), text( full_verse ), a_of_f( article_num ) {};
 
+int Articles::get_article()
+{
+	return a_of_f;
+};
+
 void Articles::individual_display() const
 {
-	cout << "\n\t# " << a_of_f;
-	cout << "\n" << verse << "\n";
-	cout << "\t" << text << "\n";
+	cout << "\n\tArticle # " << a_of_f;
+	cout <<"\n " << verse << "\n" << "\t" << text << "\n";
 };
+
+void Articles::display_verse_only(void) const
+{
+	cout << "\nCan you guess what number this one is? ";
+	cout << "\n" << "\t" << text << "\n";
+}
 
 void Articles::display_all(list<Articles>& article_list)
 {
@@ -74,7 +84,7 @@ void Articles::build_list(list<Articles>& article_list)
 	a12.a_of_f = 12;
 	article_list.push_back(a12);
 	a13.verse = "Articles of Faith 1:13";
-	a13.text = "We believe in being honest, true, chaste, benevolent, virtuous, and in doing good to all men; indeed, we may say that we follow the admonition of Paul�We believe all things, we hope all things, we have endured many things, and hope to be able to endure all things. If there is anything virtuous, lovely, or of good report or praiseworthy, we seek after these things.";
+	a13.text = "We believe in being honest, true, chaste, benevolent, virtuous, and in doing good to all men; indeed, we may say that we follow the admonition of Paul. We believe all things, we hope all things, we have endured many things, and hope to be able to endure all things. If there is anything virtuous, lovely, or of good report or praiseworthy, we seek after these things.";
 	a13.a_of_f = 13;
 	article_list.push_back(a13);
 };
