@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <sstream>
 using namespace std;
 
 Articles::Articles() : verse{ "" }, text{ "" }, a_of_f{ 0 } {};
@@ -12,17 +13,37 @@ int Articles::get_article()
 	return a_of_f;
 };
 
+/* this breaks in iteration...
+string Articles::individual_display() const
+{
+	stringstream ss;
+	int width = 70; // maximum width for each line
+	ss << "\n\t" << verse << "\n" << "\nArticle # " << a_of_f;
+	for (int i = 0; i < text.length(); i += width) {
+		ss << setw(width) << left << text.substr(i, width) << endl;
+	}
+	return ss.str();
+};
+*/
+
 void Articles::individual_display() const
 {
-	cout << "\n\tArticle # " << a_of_f;
-	cout <<"\n " << verse << "\n" << "\t" << text << "\n";
+	int width = 70; // maximum width for each line
+	cout << "\n\t" << verse << "\n";
+	cout << "\nArticle # " << a_of_f << "\n";
+	for (int i = 0; i < text.length(); i += width) {
+		cout << setw(width) << left << text.substr(i, width) << endl;
+	}
 };
 
 void Articles::display_verse_only(void) const
 {
-	cout << "\nCan you guess what number this one is? ";
-	cout << "\n" << "\t" << text << "\n";
-}
+	int width = 70;
+	cout << "\nCan you guess what number this one is? \n";
+	for (int i = 0; i < text.length(); i += width) {
+		cout << setw(width) << left << text.substr(i, width) << endl;
+	}
+};
 
 void Articles::display_all(list<Articles>& article_list)
 {
