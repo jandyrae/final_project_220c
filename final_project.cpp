@@ -77,13 +77,13 @@ int main()
 			break;
 
 		default:
-			// something
+			// something other than desired choice
 			make_choice = false;
 			break;
 		}
 
 	}
-	// end of main()
+	
 }
 
 void display_choices() {
